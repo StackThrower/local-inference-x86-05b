@@ -1,0 +1,22 @@
+[project]
+name = "local-inference-x86-05b"
+version = "0.1.0"
+description = "Local CPU inference of Qwen2.5-0.5B-Instruct served over FastAPI"
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.5",
+    "transformers>=4.45",
+    "accelerate>=1.0",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "huggingface-hub>=0.25",
+]
+
+# CPU-only torch wheels: much smaller image, no CUDA libraries.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
