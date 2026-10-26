@@ -5,7 +5,7 @@ from collections.abc import Iterator
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
-MODEL_ID = os.getenv("MODEL_PATH", "Qwen/Qwen2.5-0.5B-Instruct")
+MODEL_ID = os.getenv("MODEL_PATH", "Qwen/Qwen3.5-0.8B")
 NUM_THREADS = int(os.getenv("TORCH_NUM_THREADS", "0"))
 
 

@@ -1,6 +1,6 @@
 # local-inference-x86-05b
 
-Local CPU inference of [Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) on PyTorch,
+Local CPU inference of [Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B) on PyTorch,
 served over FastAPI and packaged as a `linux/amd64` Docker image. Model weights are baked into the image,
 so the container works offline.
 
@@ -36,7 +36,7 @@ Swagger UI: http://localhost:8000/docs
 curl localhost:8000/chat -H 'content-type: application/json' -d '{
   "messages": [
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Привет! Кто ты?"}
+    {"role": "user", "content": "Привіт! Хто ти?"}
   ],
   "max_new_tokens": 256,
   "temperature": 0.7
@@ -53,7 +53,10 @@ Pass `"stream": true` to get Server-Sent Events (`data: {"content": "..."}` chun
 | `MODEL_PATH` | `/models/model` in image | Local path or HF model id |
 | `TORCH_NUM_THREADS` | `0` (torch default) | CPU threads for inference |
 
-Build arg `MODEL_ID` selects a different model to bake in, e.g. `--build-arg MODEL_ID=Qwen/Qwen2.5-Coder-0.5B-Instruct`.
+Build arg `MODEL_ID` selects a different model to bake in, e.g. `--build-arg MODEL_ID=Qwen/Qwen2.5-0.5B-Instruct`.
+
+Qwen3.5-0.8B is a vision-language model; only its text part is loaded (the vision tower weights are skipped).
+It runs in non-thinking mode, as recommended for the 0.8B size.
 
 ## CI
 

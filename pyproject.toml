@@ -1,7 +1,7 @@
 [project]
 name = "local-inference-x86-05b"
 version = "0.1.0"
-description = "Local CPU inference of Qwen2.5-0.5B-Instruct served over FastAPI"
+description = "Local CPU inference of Qwen3.5-0.8B served over FastAPI"
 requires-python = ">=3.12"
 dependencies = [
     "torch>=2.5",

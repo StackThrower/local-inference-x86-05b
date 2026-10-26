@@ -14,10 +14,10 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # ---- model weights baked into the image (container runs fully offline) ----
 FROM deps AS model
-ARG MODEL_ID=Qwen/Qwen2.5-0.5B-Instruct
+ARG MODEL_ID=Qwen/Qwen3.5-0.8B
 RUN /opt/venv/bin/python -c "from huggingface_hub import snapshot_download; \
 snapshot_download('${MODEL_ID}', local_dir='/models/model', \
-allow_patterns=['*.json', '*.safetensors', '*.txt', '*.model', 'merges.txt'])"
+allow_patterns=['*.json', '*.safetensors', '*.txt', '*.model', '*.jinja'])"
 
 # ---- runtime ----
 FROM --platform=linux/amd64 python:${PYTHON_VERSION}-slim AS runtime
